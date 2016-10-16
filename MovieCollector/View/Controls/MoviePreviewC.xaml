@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="MovieCollector.View.Controls.MoviePreviewC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MovieCollector.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="32" d:DesignWidth="250">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image Source="https://images-na.ssl-images-amazon.com/images/M/MV5BODE4NDY3MjUxNV5BMl5BanBnXkFtZTYwMTMwODI3._V1_UX32_CR0,0,32,44_AL_.jpg" Stretch="None"></Image>
+    </Grid>
+</UserControl>

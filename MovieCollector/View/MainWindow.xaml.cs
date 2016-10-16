@@ -1,4 +1,5 @@
 ﻿using System;
+using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MovieCollector.ViewModel;
+using MovieCollector.Model;
 
 namespace MovieCollector
 {
@@ -20,9 +23,12 @@ namespace MovieCollector
     /// </summary>
     public partial class MainWindow : Window
     {
+        MyViewModel vm;
+
         public MainWindow()
         {
             InitializeComponent();
+            vm = new MyViewModel(new MyModel());
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -34,17 +40,7 @@ namespace MovieCollector
         {
             //get the movie name that we want to search
             string movieName = MovieBox.Text;
-            //get the IMDB main page
-            mshtml.HTMLDocument document = (mshtml.HTMLDocument)browser.Document;
-            //get the search bar element
-            mshtml.IHTMLElement searchBar = document.getElementById("navbar-query");
-            //insert in the search bar our movie name that we are looking for and click on the button
-            searchBar.setAttribute("value", movieName);
-            mshtml.IHTMLElement button = document.getElementById("navbar-submit-button");
-            if (button != null)
-                button.click();
-            //download the result page and send to the model the examine
-
+            vm.searchMovie(movieName);
         }
     }
 }

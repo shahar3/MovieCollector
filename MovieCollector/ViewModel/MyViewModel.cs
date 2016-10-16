@@ -17,6 +17,11 @@ namespace MovieCollector.ViewModel
             this.model = model;
         }
 
+        public void searchMovie(string movieName)
+        {
+            model.searchMovie(movieName);
+        }
+
         #region event triggered
         public event PropertyChangedEventHandler PropertyChanged;
         private void notifyPropertyChanged(string propName)
@@ -26,6 +31,7 @@ namespace MovieCollector.ViewModel
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
         #endregion
     }
 }

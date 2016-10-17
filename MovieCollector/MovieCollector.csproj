@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Controls\searchResultC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,10 +75,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\MoviePreview.cs" />
     <Compile Include="Model\MyModel.cs" />
     <Compile Include="ViewModel\MyViewModel.cs" />
     <Compile Include="View\Controls\MoviePreviewC.xaml.cs">
       <DependentUpon>MoviePreviewC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\searchResultC.xaml.cs">
+      <DependentUpon>searchResultC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

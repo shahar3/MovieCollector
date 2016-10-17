@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MovieCollector.ViewModel;
 using MovieCollector.Model;
+using MovieCollector.View.Controls;
 
 namespace MovieCollector
 {
@@ -29,11 +30,9 @@ namespace MovieCollector
         {
             InitializeComponent();
             vm = new MyViewModel(new MyModel());
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            browser.Navigate("http://www.imdb.com");
+            searchResultC sr = new searchResultC(vm);
+            Grid.SetRow(sr, 1);
+            searchResultPanel.Children.Add(sr);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

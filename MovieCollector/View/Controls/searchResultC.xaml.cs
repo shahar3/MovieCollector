@@ -1,4 +1,5 @@
 ﻿using MovieCollector.Model;
+using MovieCollector.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,23 +18,20 @@ using System.Windows.Shapes;
 namespace MovieCollector.View.Controls
 {
     /// <summary>
-    /// Interaction logic for MoviePreviewC.xaml
+    /// Interaction logic for searchResultC.xaml
     /// </summary>
-    public partial class MoviePreviewC : UserControl
+    public partial class searchResultC : UserControl
     {
-        public MoviePreviewC()
+
+        public searchResultC(MyViewModel vm)
+        {
+            InitializeComponent();
+            this.DataContext = vm;
+        }
+
+        public searchResultC()
         {
             InitializeComponent();
         }
-
-        public static readonly DependencyProperty MoviePreviewProperty = 
-            DependencyProperty.Register("MoviePreview", typeof(MoviePreview), typeof(MoviePreviewC));
-
-        public MoviePreview MoviePreview
-        {
-            get { return (MoviePreview)GetValue(MoviePreviewProperty); }
-            set { SetValue(MoviePreviewProperty, value); }
-        }
-
     }
 }

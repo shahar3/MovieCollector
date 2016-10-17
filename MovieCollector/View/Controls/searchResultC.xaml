@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="MovieCollector.View.Controls.searchResultC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MovieCollector.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Name="panel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="22" FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Center">Search results</TextBlock>
+        <ListBox Grid.Row="1" Name="moviesList" ItemsSource="{Binding VM_MoviesFound}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:MoviePreviewC MoviePreview="{Binding VM_MoviesFound}"></local:MoviePreviewC>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

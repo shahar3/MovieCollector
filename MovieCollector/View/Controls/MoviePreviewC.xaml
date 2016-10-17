@@ -11,6 +11,7 @@
             <ColumnDefinition Width="50"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Image Source="https://images-na.ssl-images-amazon.com/images/M/MV5BODE4NDY3MjUxNV5BMl5BanBnXkFtZTYwMTMwODI3._V1_UX32_CR0,0,32,44_AL_.jpg" Stretch="None"></Image>
+        <Image Source="{Binding MovieImg}" Stretch="None"></Image>
+        <TextBlock Grid.Column="1" Text="{Binding MovieName}"></TextBlock>
     </Grid>
 </UserControl>

@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="MovieCollector.View.Controls.ToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MovieCollector.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Click="Button_Click">Add movie</Button>
+        <Button Grid.Column="1">Remove movie</Button>
+        <TextBlock Text="Search in collection: " Margin="10" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBox Grid.Column="3" Name="searchBox"></TextBox>
+        <Button Grid.Column="4">Search</Button>
+    </Grid>
+</UserControl>

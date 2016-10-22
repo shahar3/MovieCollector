@@ -13,6 +13,11 @@ namespace MovieCollector.ViewModel
     {
         MyModel model;
 
+        /// <summary>
+        /// The default constructor
+        /// when an event is triggered in the model to correspondent event is activated in the view model
+        /// </summary>
+        /// <param name="model"></param>
         public MyViewModel(MyModel model)
         {
             this.model = model;
@@ -22,6 +27,10 @@ namespace MovieCollector.ViewModel
              };
         }
 
+        /// <summary>
+        /// Call the search movie function in the model
+        /// </summary>
+        /// <param name="movieName"></param>
         public void searchMovie(string movieName)
         {
             model.searchMovie(movieName);
@@ -37,6 +46,23 @@ namespace MovieCollector.ViewModel
             }
         }
 
+        private ObservableCollection<Movie> myCollection;
+
+        public ObservableCollection<Movie> VM_MyCollection
+        {
+            get { return model.MyCollection; }
+            set { myCollection = value; }
+        }
+
+
+        /// <summary>
+        /// call the addMovieToCollection function in the model
+        /// </summary>
+        /// <param name="selectedMovie"></param>
+        public void addMovieToCollection(MoviePreview selectedMovie)
+        {
+            model.addMovieToCollection(selectedMovie);
+        }
 
         #region event triggered
         public event PropertyChangedEventHandler PropertyChanged;
@@ -47,7 +73,6 @@ namespace MovieCollector.ViewModel
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-
         #endregion
     }
 }

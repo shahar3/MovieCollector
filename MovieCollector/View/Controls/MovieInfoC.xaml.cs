@@ -1,4 +1,4 @@
-﻿using MovieCollector.View.Controls;
+﻿using MovieCollector.Model;
 using MovieCollector.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,23 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MovieCollector.View
+namespace MovieCollector.View.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MovieInfoC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MovieInfoC : UserControl
     {
-        public MainWindow()
+        public MovieInfoC(Movie movie)
         {
             InitializeComponent();
-            MyViewModel vm = new MyViewModel(new Model.MyModel());
-            Controls.ToolBar tb = new Controls.ToolBar(vm);
-            contentPanel.Children.Add(tb);
-            CollectionScreen cs = new CollectionScreen(vm);
-            collectionPanel.Children.Add(cs);
+            this.DataContext = movie;
         }
     }
 }

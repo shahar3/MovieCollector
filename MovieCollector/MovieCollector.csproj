@@ -59,6 +59,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\Controls\CollectionScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\MenuC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\MovieInfoC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Controls\MoviePreviewC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,7 +79,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Controls\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -75,17 +95,34 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Collection.cs" />
+    <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\MoviePreview.cs" />
     <Compile Include="Model\MyModel.cs" />
     <Compile Include="ViewModel\MyViewModel.cs" />
+    <Compile Include="View\Controls\CollectionScreen.xaml.cs">
+      <DependentUpon>CollectionScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\MenuC.xaml.cs">
+      <DependentUpon>MenuC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\MovieInfoC.xaml.cs">
+      <DependentUpon>MovieInfoC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\MoviePreviewC.xaml.cs">
       <DependentUpon>MoviePreviewC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\searchResultC.xaml.cs">
       <DependentUpon>searchResultC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\ToolBar.xaml.cs">
+      <DependentUpon>ToolBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SearchWindow.xaml.cs">
+      <DependentUpon>SearchWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

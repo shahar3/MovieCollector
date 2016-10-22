@@ -18,33 +18,28 @@ using System.Windows.Shapes;
 namespace MovieCollector.View.Controls
 {
     /// <summary>
-    /// Interaction logic for searchResultC.xaml
+    /// Interaction logic for CollectionScreen.xaml
     /// </summary>
-    public partial class searchResultC : UserControl
+    public partial class CollectionScreen : UserControl
     {
-        MyViewModel vm;
+        public CollectionScreen()
+        {
+            InitializeComponent();
+        }
 
-        public searchResultC(MyViewModel vm)
+        public CollectionScreen(MyViewModel vm)
         {
             InitializeComponent();
             this.DataContext = vm;
-            this.vm = vm;
         }
 
-        public searchResultC()
+        //show the selected movie in the movie info screen
+        private void moviesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            InitializeComponent();
-        }
-
-        /// <summary>
-        /// add the selected movie to the collection
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MoviePreview selectedMovie = (MoviePreview)moviesList.SelectedItem;
-            vm.addMovieToCollection(selectedMovie);
+            movieInfoPanel.Children.Clear();
+            Movie movieToShow = (Movie)moviesList.SelectedItem;
+            MovieInfoC mic = new MovieInfoC(movieToShow);
+            movieInfoPanel.Children.Add(mic);
         }
     }
 }

@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button Click="Button_Click">Add movie</Button>
-        <Button Grid.Column="1">Remove movie</Button>
+        <Button Grid.Column="1" Click="Button_Click_1">Remove movie</Button>
         <TextBlock Text="Search in collection: " Margin="10" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
         <TextBox Grid.Column="3" Name="searchBox"></TextBox>
         <Button Grid.Column="4">Search</Button>

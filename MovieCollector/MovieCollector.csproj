@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\Controls\ActorRoleC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Controls\CollectionScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,11 +99,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Actor.cs" />
+    <Compile Include="Model\ActorRole.cs" />
     <Compile Include="Model\Collection.cs" />
     <Compile Include="Model\Movie.cs" />
     <Compile Include="Model\MoviePreview.cs" />
     <Compile Include="Model\MyModel.cs" />
     <Compile Include="ViewModel\MyViewModel.cs" />
+    <Compile Include="View\Controls\ActorRoleC.xaml.cs">
+      <DependentUpon>ActorRoleC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\CollectionScreen.xaml.cs">
       <DependentUpon>CollectionScreen.xaml</DependentUpon>
     </Compile>

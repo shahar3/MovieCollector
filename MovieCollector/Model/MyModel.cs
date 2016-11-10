@@ -8,6 +8,8 @@ using HtmlAgilityPack;
 using System.Xml;
 using System.Data;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
 
 namespace MovieCollector.Model
 {
@@ -18,9 +20,11 @@ namespace MovieCollector.Model
         const string DOMAIN = "http://www.imdb.com";
 
         //private movie details
+        private List<string> movieGenre;
         private string moviePlot;
         private string movieName;
         private int movieYear;
+        private List<ActorRole> movieCast;
 
         #region Properties
         private ObservableCollection<Movie> myCollection;
@@ -53,6 +57,88 @@ namespace MovieCollector.Model
             moviesFound = new ObservableCollection<MoviePreview>();
             myCollection = new ObservableCollection<Movie>();
             collection = new Collection();
+            movieCast = new List<ActorRole>();
+            loadData();
+        }
+
+        private void loadData()
+        {
+            if (!Directory.Exists("Data"))
+            {
+                Directory.CreateDirectory("Data");
+            }else
+            {
+                //load my collection from "data/my collection.bin"
+                if(File.Exists("Data\\my collection.bin"))
+                    readCollectionFromFile();
+            }
+        }
+
+        private void readCollectionFromFile()
+        {
+            using(FileStream fs = new FileStream("data\\my collection.bin", FileMode.Open))
+            {
+                using (BinaryReader br = new BinaryReader(fs))
+                {
+                    while (br.BaseStream.Position != br.BaseStream.Length)
+                    {
+                        string movieName = br.ReadString();
+                        string moviePlot = br.ReadString();
+                        int movieReleaseYear = br.ReadInt32();
+                        List<string> movieGenre = new List<string>();
+                        int numOfGenres = br.ReadInt32();
+                        while (numOfGenres > 0)
+                        {
+                            movieGenre.Add(br.ReadString());
+                            numOfGenres--;
+                        }
+                        List<ActorRole> movieCast = new List<ActorRole>();
+                        int numOfActors = br.ReadInt32();
+                        while (numOfActors > 0)
+                        {
+                            string actorName = br.ReadString();
+                            string actorUrl = br.ReadString();
+                            string role = br.ReadString();
+                            ActorRole actorRole = new ActorRole(new Actor(actorName, actorUrl), role);
+                            movieCast.Add(actorRole);
+                            numOfActors--;
+                        }
+                        Movie movie = new Movie(movieName, moviePlot, movieReleaseYear,movieGenre,movieCast);
+                        myCollection.Add(movie);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// creates binary file with the collection
+        /// </summary>
+        public void saveCollectionToFile()
+        {
+            using(FileStream fs = new FileStream("data\\my collection.bin", FileMode.Create))
+            {
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    foreach (Movie movie in myCollection)
+                    {
+                        bw.Write(movie.MovieName);
+                        bw.Write(movie.MoviePlot);
+                        bw.Write(movie.MovieReleaseYear);
+                        bw.Write(movie.MovieGenre.Count); //how many genres the movie has
+                        foreach (string genre in movie.MovieGenre)
+                        {
+                            bw.Write(genre);
+                        }
+                        bw.Write(movie.MovieCast.Count); //how many actors playing
+                        foreach (ActorRole actorRole in movie.MovieCast)
+                        {
+                            bw.Write(actorRole.Actor.ActorName);
+                            bw.Write(actorRole.Actor.ActorUrl);
+                            bw.Write(actorRole.Role);
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -72,7 +158,14 @@ namespace MovieCollector.Model
             movieName = selectedMovie.MovieName;
             movieYear = selectedMovie.YearReleased;
             Movie movieToAdd = getMovie(selectedMovie);
-            myCollection.Add(movieToAdd);
+            //check if the movie already exist in our collection
+            if (!myCollection.Contains(movieToAdd))
+            {
+                myCollection.Add(movieToAdd);
+            }else
+            {
+                MessageBox.Show(String.Format("The movie {0} is already in the list", movieToAdd));
+            }
         }
 
         private Movie getMovie(MoviePreview selectedMovie)
@@ -81,7 +174,7 @@ namespace MovieCollector.Model
             HtmlWeb web = new HtmlWeb();
             HtmlDocument doc = web.Load(link);
             extractMovieDetails(doc);
-            Movie movie = new Movie(movieName, moviePlot, movieYear);
+            Movie movie = new Movie(movieName, moviePlot, movieYear,movieGenre, movieCast);
             return movie;
         }
 
@@ -90,6 +183,46 @@ namespace MovieCollector.Model
             //get the plot 
             HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//div[@class=\"summary_text\"]").ToArray();
             moviePlot = nodes[0].InnerText.Trim();
+            //get the genres
+            movieGenre = new List<string>();
+            HtmlNode[] genreNodes = doc.DocumentNode.SelectNodes("//div[@id=\"title-overview-widget\"]/div[2]/div[2]/div/div[2]/div[2]/div/a//span").ToArray();
+            foreach (HtmlNode genreNode in genreNodes)
+            {
+                movieGenre.Add(genreNode.InnerText);
+            }
+            //get the cast
+            HtmlNode[] castTableNodes = doc.DocumentNode.SelectNodes("//*[@id=\"titleCast\"]/table//tr").ToArray();
+            bool firstRow = true;
+            foreach (HtmlNode row in castTableNodes)
+            {
+                if (firstRow)
+                {
+                    firstRow = false;
+                    continue;
+                }
+                int i = 0;
+                string actorName="", actorUrl="",role="",picUrl="";
+                foreach (HtmlNode column in row.SelectNodes(".//td[1]|td[2]|td[4]"))
+                {
+                    if (i%3==1)
+                    {
+                        //extract actor data
+                        actorName = column.InnerText.Trim();
+                        actorUrl = DOMAIN + column.SelectNodes(".//a")[0].GetAttributeValue("href","");
+                    }else if(i%3==2)
+                    { //extract actor's role in the movie
+                        role = column.InnerText.Trim();
+                        ActorRole actorRole = new ActorRole(new Actor(actorName, actorUrl,picUrl), role);
+                        movieCast.Add(actorRole);
+                    }else
+                    {
+                        //get actor pic
+                        HtmlNode actorPicNode = column.SelectNodes(".//a/img").First();
+                        picUrl = actorPicNode.GetAttributeValue("loadlate", "");
+                    }
+                    i++;
+                }
+            }
         }
 
         /// <summary>

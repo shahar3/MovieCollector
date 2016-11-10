@@ -9,9 +9,19 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Foreground="DarkRed" FontSize="24" Text="{Binding}"></TextBlock>
-        <TextBlock Grid.Row="1" Text="{Binding MoviePlot}"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="DarkRed" FontSize="24" Text="{Binding}"></TextBlock>
+        <TextBlock Margin="10 0 0 0" Grid.Row="1" FontWeight="Bold" Text="{Binding MovieGenreString}"></TextBlock>
+        <TextBlock Margin="10 0 0 0" Grid.Row="2" Text="{Binding MoviePlot}"></TextBlock>
+        <ListBox Grid.Row="3" ItemsSource="{Binding MovieCast}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:ActorRoleC ActorRole="{Binding MovieCast}"></local:ActorRoleC>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

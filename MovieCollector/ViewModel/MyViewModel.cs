@@ -36,6 +36,11 @@ namespace MovieCollector.ViewModel
             model.searchMovie(movieName);
         }
 
+        public void onClose()
+        {
+            model.saveCollectionToFile();
+        }
+
         private ObservableCollection<MoviePreview> moviesFound;
 
         public ObservableCollection<MoviePreview> VM_MoviesFound

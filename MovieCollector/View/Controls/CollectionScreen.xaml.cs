@@ -41,5 +41,15 @@ namespace MovieCollector.View.Controls
             MovieInfoC mic = new MovieInfoC(movieToShow);
             movieInfoPanel.Children.Add(mic);
         }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
     }
 }

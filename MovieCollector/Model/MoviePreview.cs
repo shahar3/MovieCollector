@@ -64,7 +64,7 @@ namespace MovieCollector.Model
         /// <returns></returns>
         public override string ToString()
         {
-            return movieName + " - " + yearReleased;
+            return string.Format("{0} ({1})", movieName, yearReleased);
         }
     }
 }

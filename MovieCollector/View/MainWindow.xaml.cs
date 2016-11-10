@@ -21,14 +21,21 @@ namespace MovieCollector.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        MyViewModel vm;
+
         public MainWindow()
         {
             InitializeComponent();
-            MyViewModel vm = new MyViewModel(new Model.MyModel());
+            vm = new MyViewModel(new Model.MyModel());
             Controls.ToolBar tb = new Controls.ToolBar(vm);
             contentPanel.Children.Add(tb);
             CollectionScreen cs = new CollectionScreen(vm);
             collectionPanel.Children.Add(cs);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            vm.onClose();
         }
     }
 }

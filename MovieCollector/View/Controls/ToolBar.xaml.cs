@@ -39,5 +39,15 @@ namespace MovieCollector.View.Controls
             SearchWindow sw = new SearchWindow(vm);
             sw.Show();
         }
+
+        /// <summary>
+        /// Remove the selected movie
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
